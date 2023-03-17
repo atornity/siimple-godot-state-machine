@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://bhvse5wd3g4va"]
+
+[ext_resource type="Texture2D" uid="uid://ccyo0nwhgalrc" path="res://icon.svg" id="1_u1bjs"]
+[ext_resource type="Script" path="res://wwww.gd" id="2_laxh5"]
+[ext_resource type="Script" path="res://state_machine/state_machine.gd" id="3_sl1xs"]
+[ext_resource type="Script" path="res://states/sleeping.gd" id="4_qrvm0"]
+[ext_resource type="Script" path="res://transitions/sleeping_to_counting.gd" id="6_gears"]
+[ext_resource type="Script" path="res://states/counting_sheep.gd" id="6_u7tha"]
+[ext_resource type="Script" path="res://transitions/counting_to_sleeping.gd" id="8_8rhhv"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(534, 328)
+texture = ExtResource("1_u1bjs")
+script = ExtResource("2_laxh5")
+
+[node name="Label" type="Label" parent="Sprite2D"]
+anchors_preset = -1
+anchor_top = -0.266
+anchor_right = 1.0
+offset_left = -63.0
+offset_top = -58.952
+offset_right = -65.0
+offset_bottom = -67.0
+size_flags_horizontal = 4
+text = "state"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StateMachine" type="Node" parent="Sprite2D"]
+script = ExtResource("3_sl1xs")
+
+[node name="Sleeping" type="Node" parent="Sprite2D/StateMachine"]
+script = ExtResource("4_qrvm0")
+
+[node name="ToCounting" type="Node" parent="Sprite2D/StateMachine/Sleeping" node_paths=PackedStringArray("target")]
+script = ExtResource("6_gears")
+target = NodePath("../../CountingSheeps")
+
+[node name="CountingSheeps" type="Node" parent="Sprite2D/StateMachine"]
+script = ExtResource("6_u7tha")
+
+[node name="ToSleeping" type="Node" parent="Sprite2D/StateMachine/CountingSheeps" node_paths=PackedStringArray("target")]
+script = ExtResource("8_8rhhv")
+target = NodePath("../../Sleeping")
