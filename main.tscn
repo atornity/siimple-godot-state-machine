@@ -1,19 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhvse5wd3g4va"]
+[gd_scene load_steps=9 format=3 uid="uid://c5as7e525ho1k"]
 
 [ext_resource type="Texture2D" uid="uid://ccyo0nwhgalrc" path="res://icon.svg" id="1_u1bjs"]
-[ext_resource type="Script" path="res://wwww.gd" id="2_laxh5"]
+[ext_resource type="Script" path="res://sprite.gd" id="2_lgbuc"]
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="3_sl1xs"]
 [ext_resource type="Script" path="res://states/sleeping.gd" id="4_qrvm0"]
 [ext_resource type="Script" path="res://transitions/sleeping_to_counting.gd" id="6_gears"]
 [ext_resource type="Script" path="res://states/counting_sheep.gd" id="6_u7tha"]
 [ext_resource type="Script" path="res://transitions/counting_to_sleeping.gd" id="8_8rhhv"]
+[ext_resource type="Script" path="res://cancel_state.gd" id="8_v0m50"]
 
 [node name="Main" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(534, 328)
 texture = ExtResource("1_u1bjs")
-script = ExtResource("2_laxh5")
+script = ExtResource("2_lgbuc")
 
 [node name="Label" type="Label" parent="Sprite2D"]
 anchors_preset = -1
@@ -44,3 +45,8 @@ script = ExtResource("6_u7tha")
 [node name="ToSleeping" type="Node" parent="Sprite2D/StateMachine/CountingSheeps" node_paths=PackedStringArray("target")]
 script = ExtResource("8_8rhhv")
 target = NodePath("../../Sleeping")
+
+[node name="Cancel" type="Node" parent="Sprite2D/StateMachine/CountingSheeps" node_paths=PackedStringArray("target")]
+script = ExtResource("8_v0m50")
+target = NodePath("..")
+is_recursive = true

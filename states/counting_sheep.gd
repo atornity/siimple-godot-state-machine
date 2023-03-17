@@ -11,6 +11,9 @@ func _process(delta):
 
 # called when the state is entered
 func _enter(from):
+	if from is CountingSheep:
+		print(".. where was I again?")
+		return
 	if been_here:
 		print("oh well.. back to counting..")
 	else: 
@@ -20,8 +23,8 @@ func _enter(from):
 
 # called when we leave the state
 func _leave(to):
-	if to is Sleeping:
-		print("(yawn)")
+	if to is CountingSheep:
+		print("quit it! I'm trying to count!")
 	sheep_counted = 0 # reset any relevant data when we leave (if we don't we will have issues)
 
 

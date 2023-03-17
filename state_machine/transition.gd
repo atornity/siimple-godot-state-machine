@@ -2,13 +2,17 @@ class_name Transition extends Node
 
 @export var target: State:
 	set(val): target = validate_target(val)
+@export var is_recursive = false
 
 @onready var state: State = validate_state()
 
 
 func validate_state():
 	var s: State = get_parent()
-	assert(s != target, "current and target can not be the same state..")
+	if is_recursive:
+		target = s
+		return s
+	assert(s != target, "current and target can not be the same state.. (enable is_recursive if this was intended)")
 	return s
 
 

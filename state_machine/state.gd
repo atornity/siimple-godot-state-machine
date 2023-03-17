@@ -6,6 +6,7 @@ class_name State extends Node
 func get_transitions() -> Array[Transition]:
 	var children: Array[Transition]
 	for c in get_children():
+		assert(c is Transition, "all children must be transitions")
 		children.push_back(c)
 	return children
 

@@ -1,6 +1,5 @@
 class_name StateMachine extends Node
 
-
 enum ProcessMode { PROCESS, PHYSICS_PROCESS, NONE }
 
 @export var state_owner: Node
@@ -43,6 +42,7 @@ func process_transitions():
 	if warn_reached_max:
 		push_warning("max transitions reached! (you may have forgotten to reset your state somewhere)")
 
+
 func try_transition() -> bool:
 	for trans in active.transitions:
 		if trans._transition():
@@ -57,8 +57,8 @@ func change_state(new_state: State):
 	for trans in active.transitions:
 		trans.set_process(false)
 	
-	new_state.set_process(true)
 	new_state._enter(active)
+	new_state.set_process(true)
 	for trans in new_state.transitions:
 		trans.set_process(true)
 	
