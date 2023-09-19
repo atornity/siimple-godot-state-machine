@@ -49,4 +49,4 @@ target = NodePath("../../Sleeping")
 [node name="Cancel" type="Node" parent="Sprite2D/StateMachine/CountingSheeps" node_paths=PackedStringArray("target")]
 script = ExtResource("8_v0m50")
 target = NodePath("..")
-is_recursive = true
+recursive = true
